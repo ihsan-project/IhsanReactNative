@@ -41,6 +41,12 @@ React Native Bootstrap
 1. Run `yarn install`
 1. Run `yarn ios`
 
+### Debugging app not building/running
+
+- If running iOS, manually delete the dev apps from the simulator
+- Run `yarn clean`
+- Run `yarn setup`
+
 ## Redux Developer Tools
 
 - [Install redux developer tools using `brew`](https://dev.to/piscespieces/how-to-debug-redux-in-a-react-native-app-4b19)
@@ -49,6 +55,12 @@ React Native Bootstrap
 - on iOS Simulator: `cmd+d` then choose 'Debug'
 - on Android Emulator: `cmd+m` then choose 'Debug'
 
+## Updating libraries
+ - Use `yarn updgrade --latest` to update all the libraries to latest
+ - Possibly need to upgrade Android `minSdkVersion`: Bump the number.
+ - Possibly need to update iOS Minimum Deployment Target: In Podfile the `platform` method
+ - Possibly need to run `cd ios && pod outdated` and then update Podfile with versions accordingly
+ - Upgrade the [Flipper](https://fbflipper.com/docs/getting-started/react-native/#using-the-latest-flipper-sdk) version. For ios update in Podfile
 ## Git Commit Flow
 
 You can...
