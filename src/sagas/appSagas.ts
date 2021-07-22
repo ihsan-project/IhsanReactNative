@@ -1,5 +1,4 @@
-import { takeEvery, put, call } from 'redux-saga/effects';
-
+import { takeEvery, put } from 'redux-saga/effects';
 import { APP_DID_LOAD, HYDRATE_APP_UNAUTH } from '../constants';
 import {
   hydrateAppUnauth as hydrateAction,
@@ -11,11 +10,7 @@ function* beginUnauthHydration() {
 }
 
 function* downloadSettings() {
-  console.log('begin downloading settings...');
-
-  yield put(fetchSettingsAction());
-
-  console.log('done downloading settings...');
+  yield put(fetchSettingsAction()); // TODO: Figure out the type error here for redux actions
 }
 
 export function* appDidLoad() {

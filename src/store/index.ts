@@ -7,8 +7,10 @@ import api from '../middleware/api';
 
 const sagaMiddleware = createSagaMiddleware();
 
-const enhancer = composeWithDevTools(applyMiddleware(api, sagaMiddleware));
+// Add to list of middlewares here
+const middlewares = [api, sagaMiddleware];
 
+const enhancer = composeWithDevTools(applyMiddleware(...middlewares));
 const store = createStore(rootReducer, initialState, enhancer);
 
 sagaMiddleware.run(rootSaga);

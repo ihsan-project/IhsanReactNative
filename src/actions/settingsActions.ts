@@ -1,11 +1,11 @@
-import { CALL_API } from '../middleware/api';
+import { CALL_API, ApiAction } from '../middleware/api';
 import {
   FETCH_SETTINGS_REQUEST,
   FETCH_SETTINGS_SUCCESS,
   FETCH_SETTINGS_FAILURE,
 } from '../constants';
 
-export const fetchSettings = () => ({
+export const fetchSettings = (): ApiAction => ({
   [CALL_API]: {
     endpoint: 'settings',
     // headers: {
@@ -13,7 +13,6 @@ export const fetchSettings = () => ({
     //     'X-Identity-Token': authToken
     // },
     method: 'GET',
-    // schema: searchesSchema,
     types: [
       FETCH_SETTINGS_REQUEST,
       FETCH_SETTINGS_SUCCESS,
