@@ -1,8 +1,14 @@
-import { LOADING_SHOW, LOADING_HIDE, APP_DID_LOAD } from '../constants';
+import {
+  LOADING_SHOW,
+  LOADING_HIDE,
+  APP_DID_LOAD,
+  FETCH_SETTINGS_SUCCESS,
+} from '../constants';
 
 export const initialState = {
   displayLoading: false,
   didLoad: false,
+  settings: {},
 };
 
 export default (state = initialState, action) => {
@@ -21,6 +27,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         didLoad: true,
+      };
+    case FETCH_SETTINGS_SUCCESS:
+      return {
+        ...state,
+        settings: action.response,
       };
     default:
       return state;
