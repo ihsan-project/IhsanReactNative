@@ -1,4 +1,6 @@
 import {
+  LOADING_SHOW,
+  LOADING_HIDE,
   FETCH_SETTINGS_REQUEST,
   FETCH_SETTINGS_SUCCESS,
   FETCH_SETTINGS_FAILURE,
@@ -6,9 +8,14 @@ import {
 
 export const initialState = {
   settings: false,
+  displayLoading: false,
 };
 
 const loadingTypes = {
+  displayLoading: {
+    [LOADING_SHOW]: true,
+    [LOADING_HIDE]: false,
+  },
   settings: {
     [FETCH_SETTINGS_REQUEST]: true,
     [FETCH_SETTINGS_SUCCESS]: false,
