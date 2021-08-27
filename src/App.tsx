@@ -26,9 +26,10 @@ const Stack = createStackNavigator();
 
 const App: React.FC = () => {
   const isLoggedIn = useSelector((state) => (state as any).auth.isLoggedIn);
-  const displayLoading = useSelector(
-    (state) => (state as any).app.displayLoading,
-  );
+  let displayLoading = false;
+
+  // const loadingState = useSelector((state) => (state as any).loading);
+
   const dispatch = useDispatch();
 
   dispatch(appDidLoad());

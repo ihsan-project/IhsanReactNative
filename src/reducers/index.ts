@@ -4,13 +4,15 @@ import countReducers, {
   initialState as initialCountState,
 } from './countReducers';
 import appReducers, { initialState as initialAppState } from './appReducers';
-import loadingReducers from './loadingReducers';
+import loadingReducers, {
+  initialState as initialLoadingState,
+} from './loadingReducers';
 
 export const initialState = {
   auth: { ...initialAuthState },
   count: { ...initialCountState },
   app: { ...initialAppState },
-  loading: {},
+  loading: { ...initialLoadingState },
 };
 
 export default combineReducers({
