@@ -1,5 +1,5 @@
 import React from 'react';
-import { StatusBar, StyleSheet } from 'react-native';
+import { StatusBar, StyleSheet, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -46,7 +46,9 @@ const App: React.FC = () => {
           )}
         </Stack.Navigator>
       </NavigationContainer>
-      <Overlay />
+      <View style={styles.overlay}>
+        <Overlay />
+      </View>
     </>
   );
 };

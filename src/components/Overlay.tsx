@@ -4,15 +4,15 @@ import { StyleSheet, View } from 'react-native';
 
 const styles = StyleSheet.create({
   overlay: {
-    // position: 'absolute',
-    // top: 0,
-    // right: 0,
-    // bottom: 0,
-    // left: 0,
-    // justifyContent: 'center',
-    // alignItems: 'center',
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: 'grey',
-    opacity: 0.9,
+    opacity: 0.8,
   },
 });
 
@@ -23,7 +23,11 @@ const Overlay: React.FC = () => {
     false,
   );
 
-  return <View>{displayLoading && <View style={styles.overlay} />}</View>;
+  if (displayLoading) {
+    return <View style={styles.overlay} />;
+  }
+
+  return null;
 };
 
 export default Overlay;
