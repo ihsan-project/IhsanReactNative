@@ -1,15 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 import { ProgressBar as Bar, Colors } from 'react-native-paper';
-
-const styles = StyleSheet.create({
-  booksContainer: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-  },
-});
 
 const ProgressBar: React.FC = () => {
   const loadingStates = useSelector((state) => (state as any).loading);
@@ -19,9 +11,7 @@ const ProgressBar: React.FC = () => {
   );
 
   return (
-    <View style={styles.booksContainer}>
-      {displayLoading && <Bar color={Colors.red800} indeterminate />}
-    </View>
+    <View>{displayLoading && <Bar color={Colors.red800} indeterminate />}</View>
   );
 };
 
