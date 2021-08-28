@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, StatusBar, View } from 'react-native';
+import { StatusBar } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -7,20 +7,7 @@ import HomeContainer from './containers/Home';
 import LoginContainer from './containers/Login';
 import { appDidLoad } from './actions';
 import ProgressBar from './components/ProgressBar';
-
-const styles = StyleSheet.create({
-  overlay: {
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'grey',
-    opacity: 0.4,
-  },
-});
+import Overlay from './components/Overlay';
 
 const Stack = createStackNavigator();
 
@@ -47,7 +34,7 @@ const App: React.FC = () => {
           )}
         </Stack.Navigator>
       </NavigationContainer>
-      {/* {displayLoading && <View style={styles.overlay} />} */}
+      <Overlay />
     </>
   );
 };
