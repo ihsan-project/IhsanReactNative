@@ -33,7 +33,7 @@ const Login: React.FC = () => {
       console.info('idToken', idToken);
 
       dispatch(hideLoading());
-      dispatch(logIn());
+      dispatch(logIn(idToken));
     } catch (error) {
       dispatch(hideLoading());
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {

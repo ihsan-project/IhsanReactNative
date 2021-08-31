@@ -1,11 +1,10 @@
 import { LOG_IN, LOG_OUT } from '../constants';
 
-// TODO: Fix the type in Future PR
-export const logIn = (): any => ({
+export const logIn = (idToken: string): any => ({
   type: LOG_IN,
+  payload: { idToken },
 });
 
-// TODO: Fix the type in Future PR
 export const logOut = (): any => ({
   type: LOG_OUT,
 });
