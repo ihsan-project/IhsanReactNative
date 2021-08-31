@@ -5,6 +5,7 @@ export const CALL_API = Symbol('CALL_API');
 export interface ApiAction {
   [CALL_API]: {
     endpoint: string;
+    body: any;
     method: string;
     types: string[];
   };

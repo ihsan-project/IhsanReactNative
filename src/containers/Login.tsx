@@ -28,9 +28,9 @@ const Login: React.FC = () => {
 
     try {
       await GoogleSignin.hasPlayServices();
-      const { idToken } = await GoogleSignin.signIn();
-
-      console.info('idToken', idToken);
+      const userInfo = await GoogleSignin.signIn();
+      console.log("google user info", userInfo);
+      const { idToken } = userInfo;
 
       dispatch(hideLoading());
       dispatch(logIn(idToken));
@@ -41,7 +41,7 @@ const Login: React.FC = () => {
       } else if (error.code === statusCodes.IN_PROGRESS) {
         Alert.alert('Signin in progress');
       } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-        Alert.alert('PLAY_SERVICES_NOT_AVAILABLE');
+        Alert.alert('Play services not available');
       } else {
         Alert.alert('Signin Error', error.message);
       }

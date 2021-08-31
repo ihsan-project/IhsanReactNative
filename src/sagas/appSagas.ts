@@ -19,5 +19,5 @@ export function* appDidLoad() {
 
 export function* unAuthHydrating() {
   yield takeEvery(HYDRATE_APP_UNAUTH, downloadSettings);
-  yield console.log('do other unauthenticated hydration here');
+  // do other unauthenticated hydration here
 }
