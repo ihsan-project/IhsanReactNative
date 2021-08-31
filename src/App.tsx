@@ -1,12 +1,13 @@
 import React from 'react';
-import { StyleSheet, StatusBar, View } from 'react-native';
+import { StatusBar, StyleSheet, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { ProgressBar, Colors } from 'react-native-paper';
 import HomeContainer from './containers/Home';
 import LoginContainer from './containers/Login';
 import { appDidLoad } from './actions';
+import ProgressBar from './components/ProgressBar';
+import Overlay from './components/Overlay';
 
 const styles = StyleSheet.create({
   overlay: {
@@ -17,8 +18,6 @@ const styles = StyleSheet.create({
     left: 0,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'grey',
-    opacity: 0.4,
   },
 });
 
@@ -26,17 +25,14 @@ const Stack = createStackNavigator();
 
 const App: React.FC = () => {
   const isLoggedIn = useSelector((state) => (state as any).auth.isLoggedIn);
-  const displayLoading = useSelector(
-    (state) => (state as any).app.displayLoading,
-  );
-  const dispatch = useDispatch();
 
+  const dispatch = useDispatch();
   dispatch(appDidLoad());
 
   return (
     <>
       <StatusBar barStyle="dark-content" />
-      {displayLoading && <ProgressBar color={Colors.red800} indeterminate />}
+      <ProgressBar />
       <NavigationContainer>
         <Stack.Navigator>
           {isLoggedIn ? (
@@ -50,7 +46,9 @@ const App: React.FC = () => {
           )}
         </Stack.Navigator>
       </NavigationContainer>
-      {displayLoading && <View style={styles.overlay} />}
+      <View style={styles.overlay}>
+        <Overlay />
+      </View>
     </>
   );
 };
