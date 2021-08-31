@@ -30,10 +30,9 @@ const Login: React.FC = () => {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
       console.log("google user info", userInfo);
-      const { idToken } = userInfo;
 
       dispatch(hideLoading());
-      dispatch(logIn(idToken));
+      dispatch(logIn(userInfo));
     } catch (error) {
       dispatch(hideLoading());
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
