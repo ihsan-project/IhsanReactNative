@@ -3,13 +3,15 @@ import { getAuthToken } from '../actions';
 import { LOG_IN } from '../constants';
 
 export function* attemptToLogin(payload: any) {
-  yield console.log('authSaga: attemptToLogin', payload);
-  yield put(getAuthToken(
-      payload.idToken,
-      payload.user.id,
-      payload.user.givenName,
-      payload.user.email
-    )
+  const { userInfo } = payload;
+  yield console.log('authSaga: attemptToLogin', userInfo);
+  yield put(
+    getAuthToken(
+      userInfo.idToken,
+      userInfo.user.id,
+      userInfo.user.givenName,
+      userInfo.user.email,
+    ),
   );
 }
 

@@ -9,7 +9,7 @@ import { CALL_API, ApiAction } from '../middleware/api';
 
 export const logIn = (userInfo: any | null): any => ({
   type: LOG_IN,
-  payload: userInfo,
+  userInfo,
 });
 
 export const logOut = (): any => ({
