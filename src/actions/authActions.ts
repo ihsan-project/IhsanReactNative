@@ -25,7 +25,7 @@ export const getAuthToken = (
   [CALL_API]: {
     endpoint: 'authorizations',
     method: 'POST',
-    body: { digest, uuid, first_name: firstName, email },
+    body: { digest, uuid, first_name: firstName, email, platform: 1 }, // Need to use the settings for the platform value here
     types: [FETCH_AUTH_REQUEST, FETCH_AUTH_SUCCESS, FETCH_AUTH_FAILURE],
   },
 });
