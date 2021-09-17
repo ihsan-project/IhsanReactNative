@@ -4,7 +4,6 @@ import { LOG_IN } from '../constants';
 
 export function* attemptToLogin(payload: any) {
   const { userInfo } = payload;
-  yield console.log('authSaga: attemptToLogin', userInfo);
   yield put(
     getAuthToken(
       userInfo.idToken,

@@ -29,7 +29,6 @@ const Login: React.FC = () => {
     try {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
-      console.log("google user info", userInfo);
 
       dispatch(hideLoading());
       dispatch(logIn(userInfo));

@@ -1,7 +1,8 @@
-import { LOG_IN, LOG_OUT } from '../constants';
+import { LOG_IN, LOG_OUT, FETCH_AUTH_SUCCESS } from '../constants';
 
 export const initialState = {
   isLoggedIn: false,
+  user: null,
 };
 
 export default (state = initialState, action: any) => {
@@ -15,6 +16,11 @@ export default (state = initialState, action: any) => {
       return {
         ...state,
         isLoggedIn: false,
+      };
+    case FETCH_AUTH_SUCCESS:
+      return {
+        ...state,
+        user: action.response,
       };
     default:
       return state;
