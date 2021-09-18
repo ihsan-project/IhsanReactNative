@@ -13,7 +13,7 @@
     "android-fingerprint": "keytool -list -v -keystore android/app/debug.keystore -alias androiddebugkey -storepass android -keypass android",
     "presetup": "node ./scripts/setup.js",
     "setup": "cd ios && pod install",
-    "clean": "watchman watch-del-all && yarn cache clean && cd android && ./gradlew app:uninstallAll"
+    "clean": "watchman watch-del-all && yarn cache clean && cd android && ./gradlew app:uninstallAll && ./gradlew clean && ./gradlew :app:bundleRelease"
   },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.10",
