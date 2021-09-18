@@ -20,13 +20,13 @@ export function* logIn() {
 }
 
 async function saveAccessToken(payload: any) {
-  console.log('user info', payload.response);
+  const { response } = payload;
 
-  // await Keychain.setGenericPassword(username, password);
+  await Keychain.setGenericPassword(response.email, response.access);
 }
 
 export function* handleUserInfo(payload: any) {
-  yield call(saveAccessToken);
+  yield call(saveAccessToken(payload));
 }
 
 export function* loggedIn() {
