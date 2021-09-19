@@ -26,7 +26,7 @@ async function saveAccessToken(payload: any) {
 }
 
 export function* handleUserInfo(payload: any) {
-  yield call(saveAccessToken(payload));
+  yield call(saveAccessToken, payload);
 }
 
 export function* loggedIn() {
