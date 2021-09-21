@@ -3,7 +3,11 @@ import {
   LOADING_SHOW,
   APP_DID_LOAD,
   HYDRATE_APP_UNAUTH,
+  FETCH_PROFILE_REQUEST,
+  FETCH_PROFILE_SUCCESS,
+  FETCH_PROFILE_FAILURE,
 } from '../constants';
+import { CALL_API, ApiAction } from '../middleware/api';
 
 export const showLoading = () => ({
   type: LOADING_SHOW,
@@ -19,4 +23,16 @@ export const appDidLoad = () => ({
 
 export const hydrateAppUnauth = () => ({
   type: HYDRATE_APP_UNAUTH,
+});
+
+export const getProfile = (): ApiAction => ({
+  [CALL_API]: {
+    endpoint: 'users/profile',
+    method: 'GET',
+    types: [
+      FETCH_PROFILE_REQUEST,
+      FETCH_PROFILE_SUCCESS,
+      FETCH_PROFILE_FAILURE,
+    ],
+  },
 });

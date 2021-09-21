@@ -7,7 +7,7 @@ import {
 } from '../constants';
 import { CALL_API, ApiAction } from '../middleware/api';
 
-export const logIn = (userInfo: any | null): any => ({
+export const logIn = (userInfo?: any): any => ({
   type: LOG_IN,
   userInfo,
 });
