@@ -1,12 +1,12 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import * as Keychain from 'react-native-keychain';
-import { getAuthToken } from '../actions';
-import { LOG_IN, FETCH_AUTH_SUCCESS } from '../constants';
+import { getAuthToken as getAuthTokenAction } from '../actions';
+import { GOOGLE_SIGNED_IN, FETCH_AUTH_SUCCESS } from '../constants';
 
-export function* attemptToLogin(payload: any) {
+export function* getAuthToken(payload: any) {
   const { userInfo } = payload;
   yield put(
-    getAuthToken(
+    getAuthTokenAction(
       userInfo.idToken,
       userInfo.user.id,
       userInfo.user.givenName,
@@ -15,8 +15,8 @@ export function* attemptToLogin(payload: any) {
   );
 }
 
-export function* logIn() {
-  yield takeEvery(LOG_IN, attemptToLogin);
+export function* loggingIn() {
+  yield takeEvery(GOOGLE_SIGNED_IN, getAuthToken);
 }
 
 async function saveAccessToken(response: any) {

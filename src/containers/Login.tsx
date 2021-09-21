@@ -7,7 +7,7 @@ import {
   statusCodes,
 } from 'react-native-google-signin';
 import config from 'react-native-config';
-import { logIn, showLoading, hideLoading } from '../actions';
+import { googleAuthenticated, showLoading, hideLoading } from '../actions';
 
 const styles = StyleSheet.create({
   container: {
@@ -31,7 +31,7 @@ const Login: React.FC = () => {
       const userInfo = await GoogleSignin.signIn();
 
       dispatch(hideLoading());
-      dispatch(logIn(userInfo));
+      dispatch(googleAuthenticated(userInfo));
     } catch (error) {
       dispatch(hideLoading());
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {

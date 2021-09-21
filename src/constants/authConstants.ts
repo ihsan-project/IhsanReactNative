@@ -1,5 +1,6 @@
 export const LOG_IN = 'AUTH/LOGIN';
 export const LOG_OUT = 'AUTH/LOGOUT';
+export const GOOGLE_SIGNED_IN = 'GOOGLE_SIGNED_IN';
 export const FETCH_AUTH_REQUEST = 'FETCH_AUTH_REQUEST';
 export const FETCH_AUTH_SUCCESS = 'FETCH_AUTH_SUCCESS';
 export const FETCH_AUTH_FAILURE = 'FETCH_AUTH_FAILURE';

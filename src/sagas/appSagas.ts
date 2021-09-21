@@ -5,6 +5,7 @@ import {
   hydrateAppUnauth as hydrateAction,
   fetchSettings as fetchSettingsAction,
   getProfile as getProfileAction,
+  logIn as logInAction,
 } from '../actions';
 
 function* beginUnauthHydration() {
@@ -29,7 +30,7 @@ function* checkLoggedIn(keychain: any) {
 
   if (token) {
     yield put(getProfileAction());
-    yield put({ type: LOG_IN });
+    yield put(logInAction());
   }
 }
 

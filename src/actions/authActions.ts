@@ -1,15 +1,20 @@
 import {
   LOG_IN,
   LOG_OUT,
+  GOOGLE_SIGNED_IN,
   FETCH_AUTH_REQUEST,
   FETCH_AUTH_SUCCESS,
   FETCH_AUTH_FAILURE,
 } from '../constants';
 import { CALL_API, ApiAction } from '../middleware/api';
 
-export const logIn = (userInfo?: any): any => ({
-  type: LOG_IN,
+export const googleAuthenticated = (userInfo?: any): any => ({
+  type: GOOGLE_SIGNED_IN,
   userInfo,
+});
+
+export const logIn = (): any => ({
+  type: LOG_IN,
 });
 
 export const logOut = (): any => ({
