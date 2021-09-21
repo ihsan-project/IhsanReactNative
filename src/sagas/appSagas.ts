@@ -1,8 +1,10 @@
 import { takeEvery, take, put, call, actionChannel } from 'redux-saga/effects';
-import { APP_DID_LOAD, HYDRATE_APP_UNAUTH } from '../constants';
+import * as Keychain from 'react-native-keychain';
+import { APP_DID_LOAD, HYDRATE_APP_UNAUTH, LOG_IN } from '../constants';
 import {
   hydrateAppUnauth as hydrateAction,
   fetchSettings as fetchSettingsAction,
+  getProfile as getProfileAction,
 } from '../actions';
 
 function* beginUnauthHydration() {
@@ -13,8 +15,22 @@ function* downloadSettings() {
   yield put(fetchSettingsAction()); // TODO: Figure out the type error here for redux actions
 }
 
-function* checkKeychain() {
-  yield console.log('checking keychain');
+async function getKeychain() {
+  try {
+    return await Keychain.getGenericPassword();
+  } catch (error) {
+    console.log("Keychain couldn't be accessed!", error);
+    return null;
+  }
+}
+
+function* checkLoggedIn(keychain: any) {
+  const { password: token } = keychain;
+
+  if (token) {
+    yield put(getProfileAction());
+    yield put({ type: LOG_IN });
+  }
 }
 
 export function* appDidLoad() {
@@ -26,6 +42,7 @@ export function* unAuthHydrating() {
   while (true) {
     yield take(hydratingChannel);
     yield downloadSettings();
-    yield call(checkKeychain);
+    const keychain = yield call(getKeychain);
+    yield call(checkLoggedIn, keychain);
   }
 }
