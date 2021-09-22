@@ -1,7 +1,7 @@
 import { all } from 'redux-saga/effects';
 
 import { appDidLoad, unAuthHydrating } from './appSagas';
-import { loggingIn, authenticated } from './authSagas';
+import { loggingIn, authenticated, loggingOut } from './authSagas';
 import { fetchTodo } from './countSagas';
 
 export default function* rootSaga() {
@@ -11,5 +11,6 @@ export default function* rootSaga() {
     appDidLoad(),
     unAuthHydrating(),
     authenticated(),
+    loggingOut(),
   ]);
 }

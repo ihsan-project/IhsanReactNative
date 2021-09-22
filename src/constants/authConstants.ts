@@ -1,5 +1,6 @@
 export const LOGGED_IN = 'LOGGED_IN';
 export const LOGGED_OUT = 'LOGGED_OUT';
+export const LOGGING_OUT = 'LOGGING_OUT';
 export const GOOGLE_SIGNED_IN = 'GOOGLE_SIGNED_IN';
 export const FETCH_AUTH_REQUEST = 'FETCH_AUTH_REQUEST';
 export const FETCH_AUTH_SUCCESS = 'FETCH_AUTH_SUCCESS';

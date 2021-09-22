@@ -1,6 +1,7 @@
 import {
   LOGGED_IN,
   LOGGED_OUT,
+  LOGGING_OUT,
   GOOGLE_SIGNED_IN,
   FETCH_AUTH_REQUEST,
   FETCH_AUTH_SUCCESS,
@@ -15,6 +16,10 @@ export const googleAuthenticated = (userInfo?: any): any => ({
 
 export const loggedIn = (): any => ({
   type: LOGGED_IN,
+});
+
+export const loggingOut = (): any => ({
+  type: LOGGING_OUT,
 });
 
 export const loggedOut = (): any => ({
