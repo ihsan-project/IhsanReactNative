@@ -3,6 +3,7 @@ import * as Keychain from 'react-native-keychain';
 import {
   getAuthToken as getAuthTokenAction,
   loggedOut as loggedOutAction,
+  loggedIn as loggedInAction,
 } from '../actions';
 import {
   GOOGLE_SIGNED_IN,
@@ -37,6 +38,7 @@ async function clearAccessToken() {
 export function* handleUserInfo(payload: any) {
   const { response } = payload;
   yield call(saveAccessToken, response);
+  yield put(loggedInAction());
 }
 
 export function* authenticated() {
