@@ -29,7 +29,7 @@ function* checkLoggedIn(keychain: any) {
   const { password: token } = keychain;
 
   if (token) {
-    yield put(getProfileAction());
+    yield put(getProfileAction(token));
     yield put(loggedInAction());
   }
 }

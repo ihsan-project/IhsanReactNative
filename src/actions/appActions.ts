@@ -25,10 +25,13 @@ export const hydrateAppUnauth = () => ({
   type: HYDRATE_APP_UNAUTH,
 });
 
-export const getProfile = (): ApiAction => ({
+export const getProfile = (accessToken: string): ApiAction => ({
   [CALL_API]: {
     endpoint: 'users/profile',
     method: 'GET',
+    headers: {
+      Authorization: accessToken,
+    },
     types: [
       FETCH_PROFILE_REQUEST,
       FETCH_PROFILE_SUCCESS,
