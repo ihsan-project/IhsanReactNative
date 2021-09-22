@@ -21,6 +21,7 @@ export default (state = initialState, action: any) => {
       return {
         ...state,
         isLoggedIn: false,
+        user: null,
       };
     case FETCH_AUTH_SUCCESS:
       return {
