@@ -1,6 +1,6 @@
 import {
-  LOG_IN,
-  LOG_OUT,
+  LOGGED_IN,
+  LOGGED_OUT,
   FETCH_AUTH_SUCCESS,
   FETCH_PROFILE_SUCCESS,
 } from '../constants';
@@ -12,12 +12,12 @@ export const initialState = {
 
 export default (state = initialState, action: any) => {
   switch (action.type) {
-    case LOG_IN:
+    case LOGGED_IN:
       return {
         ...state,
         isLoggedIn: true,
       };
-    case LOG_OUT:
+    case LOGGED_OUT:
       return {
         ...state,
         isLoggedIn: false,

@@ -1,6 +1,6 @@
 import {
-  LOG_IN,
-  LOG_OUT,
+  LOGGED_IN,
+  LOGGED_OUT,
   GOOGLE_SIGNED_IN,
   FETCH_AUTH_REQUEST,
   FETCH_AUTH_SUCCESS,
@@ -13,12 +13,12 @@ export const googleAuthenticated = (userInfo?: any): any => ({
   userInfo,
 });
 
-export const logIn = (): any => ({
-  type: LOG_IN,
+export const loggedIn = (): any => ({
+  type: LOGGED_IN,
 });
 
-export const logOut = (): any => ({
-  type: LOG_OUT,
+export const loggedOut = (): any => ({
+  type: LOGGED_OUT,
 });
 
 export const getAuthToken = (

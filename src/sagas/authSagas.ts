@@ -28,6 +28,6 @@ export function* handleUserInfo(payload: any) {
   yield call(saveAccessToken, response);
 }
 
-export function* loggedIn() {
+export function* authenticated() {
   yield takeEvery(FETCH_AUTH_SUCCESS, handleUserInfo);
 }

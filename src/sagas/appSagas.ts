@@ -1,11 +1,11 @@
 import { takeEvery, take, put, call, actionChannel } from 'redux-saga/effects';
 import * as Keychain from 'react-native-keychain';
-import { APP_DID_LOAD, HYDRATE_APP_UNAUTH, LOG_IN } from '../constants';
+import { APP_DID_LOAD, HYDRATE_APP_UNAUTH } from '../constants';
 import {
   hydrateAppUnauth as hydrateAction,
   fetchSettings as fetchSettingsAction,
   getProfile as getProfileAction,
-  logIn as logInAction,
+  loggedIn as loggedInAction,
 } from '../actions';
 
 function* beginUnauthHydration() {
@@ -30,7 +30,7 @@ function* checkLoggedIn(keychain: any) {
 
   if (token) {
     yield put(getProfileAction());
-    yield put(logInAction());
+    yield put(loggedInAction());
   }
 }
 
