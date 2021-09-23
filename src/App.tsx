@@ -1,7 +1,7 @@
 import React from 'react';
 import { StatusBar, StyleSheet, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import HomeContainer from './containers/Home';
+import LoginContainer from './containers/Login';
 import MainContainer from './containers/Main';
 import { appDidLoad } from './actions';
 import ProgressBar from './components/ProgressBar';
@@ -29,7 +29,7 @@ const App: React.FC = () => {
     <>
       <StatusBar barStyle="dark-content" />
       <ProgressBar />
-      {isLoggedIn ? <HomeContainer /> : <MainContainer />}
+      {isLoggedIn ? <MainContainer /> : <LoginContainer />}
       <View style={styles.overlay}>
         <Overlay />
       </View>
