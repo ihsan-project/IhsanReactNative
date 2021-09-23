@@ -9,8 +9,6 @@ const styles = StyleSheet.create({
   },
   detailContainer: {
     flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
   },
 });
 
