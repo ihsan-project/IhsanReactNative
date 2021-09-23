@@ -1,8 +1,6 @@
 import React from 'react';
 import { StatusBar, StyleSheet, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 import HomeContainer from './containers/Home';
 import LoginContainer from './containers/Login';
 import { appDidLoad } from './actions';
@@ -21,8 +19,6 @@ const styles = StyleSheet.create({
   },
 });
 
-const Stack = createStackNavigator();
-
 const App: React.FC = () => {
   const isLoggedIn = useSelector((state) => (state as any).auth.isLoggedIn);
 
@@ -33,19 +29,7 @@ const App: React.FC = () => {
     <>
       <StatusBar barStyle="dark-content" />
       <ProgressBar />
-      <NavigationContainer>
-        <Stack.Navigator>
-          {isLoggedIn ? (
-            <Stack.Screen name="Home" component={HomeContainer} />
-          ) : (
-            <Stack.Screen
-              name="Login"
-              component={LoginContainer}
-              options={{ title: 'Ihsan React Native' }}
-            />
-          )}
-        </Stack.Navigator>
-      </NavigationContainer>
+      {isLoggedIn ? <HomeContainer /> : <LoginContainer />}
       <View style={styles.overlay}>
         <Overlay />
       </View>
