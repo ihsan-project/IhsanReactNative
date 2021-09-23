@@ -8,10 +8,6 @@ import {
 export const fetchSettings = (): ApiAction => ({
   [CALL_API]: {
     endpoint: 'settings',
-    // headers: {
-    //     'X-Identity-Key': SECRET_KEY,
-    //     'X-Identity-Token': authToken
-    // },
     method: 'GET',
     types: [
       FETCH_SETTINGS_REQUEST,

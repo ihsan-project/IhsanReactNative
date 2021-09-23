@@ -7,7 +7,7 @@ import {
   statusCodes,
 } from 'react-native-google-signin';
 import config from 'react-native-config';
-import { logIn, showLoading, hideLoading } from '../actions';
+import { googleAuthenticated, showLoading, hideLoading } from '../actions';
 
 const styles = StyleSheet.create({
   container: {
@@ -28,12 +28,10 @@ const Login: React.FC = () => {
 
     try {
       await GoogleSignin.hasPlayServices();
-      const { idToken } = await GoogleSignin.signIn();
-
-      console.info('idToken', idToken);
+      const userInfo = await GoogleSignin.signIn();
 
       dispatch(hideLoading());
-      dispatch(logIn());
+      dispatch(googleAuthenticated(userInfo));
     } catch (error) {
       dispatch(hideLoading());
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
@@ -41,7 +39,7 @@ const Login: React.FC = () => {
       } else if (error.code === statusCodes.IN_PROGRESS) {
         Alert.alert('Signin in progress');
       } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-        Alert.alert('PLAY_SERVICES_NOT_AVAILABLE');
+        Alert.alert('Play services not available');
       } else {
         Alert.alert('Signin Error', error.message);
       }

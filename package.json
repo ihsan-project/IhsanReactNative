@@ -13,7 +13,7 @@
     "android-fingerprint": "keytool -list -v -keystore android/app/debug.keystore -alias androiddebugkey -storepass android -keypass android",
     "presetup": "node ./scripts/setup.js",
     "setup": "cd ios && pod install",
-    "clean": "watchman watch-del-all && yarn cache clean && cd android && ./gradlew app:uninstallAll"
+    "clean": "watchman watch-del-all && yarn cache clean && cd android && ./gradlew app:uninstallAll && ./gradlew clean && ./gradlew :app:bundleRelease"
   },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.10",
@@ -25,6 +25,7 @@
     "react-native-config": "^1.4.2",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-google-signin": "^2.1.1",
+    "react-native-keychain": "^7.0.0",
     "react-native-paper": "^4.7.2",
     "react-native-reanimated": "^2.1.0",
     "react-native-safe-area-context": "^3.2.0",

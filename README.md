@@ -47,6 +47,27 @@ React Native Bootstrap
 - Run `yarn clean`
 - Run `yarn setup`
 
+#### If seeing Task :react-native-community_masked-view:compileReleaseJavaWithJavac FAILED
+
+- https://forums.fusetools.com/t/how-to-resolve-jdk-issue-when-building-android-on-macos-big-sur/8114
+- https://stackoverflow.com/questions/64968851/could-not-find-tools-jar-please-check-that-library-internet-plug-ins-javaapple
+
+You may have multiple versions of java installed and it's picking up the wrong JDK when building. Follow the instructions above to set your JAVA_HOME environment variable to the correct JDK.
+*Warning*: Android Studio has it's own JDK when running and next time you open Android Studio it will warn you about it and make you choose a JDK path before continuing. Not sure what to do there yet.
+#### Update Gradle version
+
+Sometimes you probably need to update the gradle version and complementary gradle plugin version. The best way to do this would be to let Android Studio IDE handle it.
+
+1. Open the android studio and open the existing app from the /android directory.
+1. Wait for the IDE to build and then there will be a popup to update grade version.
+1. Let Android Studio do its thing
+
+Android Studio will find the right Gradle version for you and update it accordingly in the files
+- `android/build.gradle`
+- `android/gradle/wrapper/gradle-wrapper.properties`
+
+Checkin these changes.
+
 ## Redux Developer Tools
 
 - [Install redux developer tools using `brew`](https://dev.to/piscespieces/how-to-debug-redux-in-a-react-native-app-4b19)

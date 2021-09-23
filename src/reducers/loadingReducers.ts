@@ -21,6 +21,11 @@ const loadingTypes = {
     [FETCH_SETTINGS_SUCCESS]: false,
     [FETCH_SETTINGS_FAILURE]: false,
   },
+  profile: {
+    FETCH_PROFILE_REQUEST: true,
+    FETCH_PROFILE_SUCCESS: false,
+    FETCH_PROFILE_FAILURE: false,
+  },
 };
 
 const handleLoading = (types, action) => {
