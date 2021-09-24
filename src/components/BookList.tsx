@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import {
   StyleSheet,
   Text,
@@ -36,6 +37,7 @@ const styles = StyleSheet.create({
 });
 
 const BookList: React.FC = () => {
+  const user = useSelector((state) => (state as any).auth.user);
   const [loading, setLoading] = useState(true);
   const [dataSource, setDataSource] = useState([]);
   const [offset, setOffset] = useState(1);
@@ -45,14 +47,15 @@ const BookList: React.FC = () => {
   const getData = () => {
     console.log('getData');
     setLoading(true);
-    makeAPICall(`books?page=${offset}`)
-      .then((response) => response.json())
-      .then((responseJson) => {
-        console.log('got data', responseJson);
+    makeAPICall(`books?page=${offset}`, {}, 'GET', {
+      Authorization: user.access,
+    })
+      .then((response) => {
+        console.log('got data', response);
         // Successful response
         setOffset(offset + 1);
         // Increasing the offset for the next API call
-        setDataSource([...dataSource, ...responseJson.results]);
+        setDataSource([...dataSource, ...response.results]);
         setLoading(false);
       })
       .catch((error) => {
