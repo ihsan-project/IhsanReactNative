@@ -34,27 +34,32 @@ const styles = StyleSheet.create({
     fontSize: 15,
     textAlign: 'center',
   },
+  seperator: {
+    height: 0.5,
+    width: '100%',
+    backgroundColor: '#C8C8C8',
+  },
 });
 
 const BookList: React.FC = () => {
   const user = useSelector((state) => (state as any).auth.user);
+
   const [loading, setLoading] = useState(true);
   const [dataSource, setDataSource] = useState([]);
-  const [offset, setOffset] = useState(1);
+  const [page, setPage] = useState(1);
 
   useEffect(() => getData(), []);
 
   const getData = () => {
-    console.log('getData');
     setLoading(true);
-    makeAPICall(`books?page=${offset}`, {}, 'GET', {
-      Authorization: user.access,
+    makeAPICall(`books?page=${page}`, {}, 'GET', {
+      Authorization: user?.access,
     })
       .then((response) => {
         console.log('got data', response);
-        // Successful response
-        setOffset(offset + 1);
-        // Increasing the offset for the next API call
+
+        setPage(page + 1);
+
         setDataSource([...dataSource, ...response.results]);
         setLoading(false);
       })
@@ -86,34 +91,22 @@ const BookList: React.FC = () => {
     </Text>
   );
 
-  const ItemSeparatorView = () => (
-    // Flat List Item Separator
-    <View
-      style={{
-        height: 0.5,
-        width: '100%',
-        backgroundColor: '#C8C8C8',
-      }}
-    />
-  );
+  const ItemSeparatorView = () => <View style={styles.seperator} />;
 
-  const getItem = (item) => {
-    // Function for click on an item
-    alert(`Id : ${item.id} Title : ${item.title}`);
+  const getItem = (item: any) => {
+    console.log('Clicked', item);
   };
 
   return (
-    <View style={{ flex: 1 }}>
-      <View style={styles.container}>
-        <FlatList
-          data={dataSource}
-          keyExtractor={(item, index) => index.toString()}
-          ItemSeparatorComponent={ItemSeparatorView}
-          enableEmptySections={true}
-          renderItem={ItemView}
-          ListFooterComponent={renderFooter}
-        />
-      </View>
+    <View style={styles.container}>
+      <FlatList
+        data={dataSource}
+        keyExtractor={(item, index) => index.toString()}
+        ItemSeparatorComponent={ItemSeparatorView}
+        enableEmptySections={true}
+        renderItem={ItemView}
+        ListFooterComponent={renderFooter}
+      />
     </View>
   );
 };
