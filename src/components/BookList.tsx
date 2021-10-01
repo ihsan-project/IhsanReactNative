@@ -91,18 +91,18 @@ const BookList: React.FC = () => {
     </View>
   );
 
+  const displayItem = (item: any) => {
+    console.log('Clicked', item);
+  };
+
   const ItemView = ({ item }) => (
     // Flat List Item
-    <Text style={styles.itemStyle} onPress={() => getItem(item)}>
-      {item.id}.{item.title.toUpperCase()}
+    <Text style={styles.itemStyle} onPress={() => displayItem(item)}>
+      {item.id}.{item.title}
     </Text>
   );
 
   const ItemSeparatorView = () => <View style={styles.seperator} />;
-
-  const getItem = (item: any) => {
-    console.log('Clicked', item);
-  };
 
   return (
     <View style={styles.container}>
@@ -110,7 +110,6 @@ const BookList: React.FC = () => {
         data={dataSource}
         keyExtractor={(item, index) => index.toString()}
         ItemSeparatorComponent={ItemSeparatorView}
-        enableEmptySections={true}
         renderItem={ItemView}
         ListFooterComponent={renderFooter}
       />
