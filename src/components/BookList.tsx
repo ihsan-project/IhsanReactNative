@@ -34,6 +34,9 @@ const styles = StyleSheet.create({
     fontSize: 15,
     textAlign: 'center',
   },
+  itemStyle: {
+    height: 44,
+  },
   seperator: {
     height: 0.5,
     width: '100%',
@@ -48,16 +51,16 @@ const BookList: React.FC = () => {
   const [dataSource, setDataSource] = useState([]);
   const [page, setPage] = useState(1);
 
-  useEffect(() => getData(), []);
-
   const getData = () => {
+    if (!user) {
+      return;
+    }
+
     setLoading(true);
     makeAPICall(`books?page=${page}`, {}, 'GET', {
       Authorization: user?.access,
     })
       .then((response) => {
-        console.log('got data', response);
-
         setPage(page + 1);
 
         setDataSource([...dataSource, ...response.results]);
@@ -67,6 +70,8 @@ const BookList: React.FC = () => {
         console.error('Failed to get books', error);
       });
   };
+
+  useEffect(getData, [user]);
 
   const renderFooter = () => (
     // Footer View with Load More button
