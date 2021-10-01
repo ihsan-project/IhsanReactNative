@@ -49,20 +49,20 @@ const BookList: React.FC = () => {
 
   const [loading, setLoading] = useState(true);
   const [dataSource, setDataSource] = useState([]);
-  const [page, setPage] = useState(1);
+  const [currPage, setCurrPage] = useState(1);
+  const [prevPage, setPrevPage] = useState(0);
 
   const getData = () => {
-    if (!user) {
+    if (!user || currPage === prevPage) {
       return;
     }
 
     setLoading(true);
-    makeAPICall(`books?page=${page}`, {}, 'GET', {
+    makeAPICall(`books?page=${currPage}`, {}, 'GET', {
       Authorization: user?.access,
     })
       .then((response) => {
-        setPage(page + 1);
-
+        setPrevPage(currPage);
         setDataSource([...dataSource, ...response.results]);
         setLoading(false);
       })
@@ -71,14 +71,16 @@ const BookList: React.FC = () => {
       });
   };
 
-  useEffect(getData, [user]);
+  useEffect(getData, [user, currPage]);
 
   const renderFooter = () => (
     // Footer View with Load More button
     <View style={styles.footer}>
       <TouchableOpacity
         activeOpacity={0.9}
-        onPress={getData}
+        onPress={() => {
+          setCurrPage(currPage + 1);
+        }}
         // On Click of button load more data
         style={styles.loadMoreBtn}>
         <Text style={styles.btnText}>Load More</Text>
