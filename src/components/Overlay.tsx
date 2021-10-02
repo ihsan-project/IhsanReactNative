@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { StyleSheet, View } from 'react-native';
 
@@ -18,10 +18,16 @@ const styles = StyleSheet.create({
 
 const Overlay: React.FC = () => {
   const loadingStates = useSelector((state) => (state as any).loading);
-  const displayLoading = Object.keys(loadingStates).reduce(
-    (p, c) => p || loadingStates[c],
-    false,
-  );
+
+  const [displayLoading, setDisplayLoading] = useState(false);
+
+  useEffect(() => {
+    const display = Object.keys(loadingStates).reduce(
+      (p, c) => p || loadingStates[c],
+      false,
+    );
+    setDisplayLoading(display);
+  }, [loadingStates]);
 
   if (displayLoading) {
     return <View style={styles.overlay} />;

@@ -12,7 +12,7 @@ export interface ApiAction {
   };
 }
 
-function makeAPICall(
+export function makeAPICall(
   endpoint: string,
   body = {},
   method = 'GET',
