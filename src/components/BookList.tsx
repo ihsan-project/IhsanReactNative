@@ -43,6 +43,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#C8C8C8',
   },
 });
+interface Book {
+  id: number;
+  // eslint-disable-next-line camelcase
+  slug_id: string;
+  type: number;
+  title: string;
+}
 
 const BookList: React.FC = () => {
   const user = useSelector((state) => (state as any).auth.user);
@@ -71,6 +78,7 @@ const BookList: React.FC = () => {
       });
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(getData, [user, currPage]);
 
   const renderFooter = () => (
@@ -95,7 +103,7 @@ const BookList: React.FC = () => {
     console.log('Clicked', item);
   };
 
-  const ItemView = ({ item }) => (
+  const ItemView = ({ item }: { item: Book }) => (
     // Flat List Item
     <Text style={styles.itemStyle} onPress={() => displayItem(item)}>
       {item.id}.{item.title}
