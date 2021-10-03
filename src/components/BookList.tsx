@@ -40,7 +40,7 @@ interface Book {
 const BookList: React.FC = () => {
   const user = useSelector((state) => (state as any).auth.user);
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [dataSource, setDataSource] = useState([]);
   const [currPage, setCurrPage] = useState(1);
   const [prevPage, setPrevPage] = useState(0);
@@ -50,24 +50,19 @@ const BookList: React.FC = () => {
     if (
       !user ||
       currPage === prevPage ||
-      (totalPages > 0 && currPage > totalPages)
+      (totalPages > 0 && currPage > totalPages) ||
+      loading
     ) {
       return;
     }
 
     setLoading(true);
-    console.log('fetching books page', currPage);
     makeAPICall(`books?page=${currPage}`, {}, 'GET', {
       Authorization: user?.access,
     })
       .then((response) => {
-        console.log(
-          `recevied books: ${JSON.stringify(response.results)} for page: ${currPage}`,
-        );
-
         // Set pagination meta once
         if (totalPages < 0 && response.meta) {
-          console.log('set total pages', response.meta?.pageCount);
           setTotalPages(response.meta?.pageCount);
         }
 
