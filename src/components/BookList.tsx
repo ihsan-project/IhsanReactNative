@@ -1,13 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import {
-  StyleSheet,
-  Text,
-  View,
-  FlatList,
-  TouchableOpacity,
-  ActivityIndicator,
-} from 'react-native';
+import { StyleSheet, Text, View, FlatList } from 'react-native';
 import { makeAPICall } from '../middleware/api';
 
 const styles = StyleSheet.create({
@@ -21,21 +14,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
   },
-  loadMoreBtn: {
-    padding: 10,
-    backgroundColor: '#800000',
-    borderRadius: 4,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  btnText: {
-    color: 'white',
-    fontSize: 15,
-    textAlign: 'center',
-  },
   itemStyle: {
-    height: 44,
+    height: 120,
   },
   seperator: {
     height: 0.5,
@@ -81,23 +61,9 @@ const BookList: React.FC = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(getData, [user, currPage]);
 
-  const renderFooter = () => (
-    // Footer View with Load More button
-    <View style={styles.footer}>
-      <TouchableOpacity
-        activeOpacity={0.9}
-        onPress={() => {
-          setCurrPage(currPage + 1);
-        }}
-        // On Click of button load more data
-        style={styles.loadMoreBtn}>
-        <Text style={styles.btnText}>Load More</Text>
-        {loading ? (
-          <ActivityIndicator color="white" style={{ marginLeft: 8 }} />
-        ) : null}
-      </TouchableOpacity>
-    </View>
-  );
+  const loadMoreBooks = () => {
+    setCurrPage(currPage + 1);
+  };
 
   const displayItem = (item: any) => {
     console.log('Clicked', item);
@@ -119,7 +85,8 @@ const BookList: React.FC = () => {
         keyExtractor={(item, index) => index.toString()}
         ItemSeparatorComponent={ItemSeparatorView}
         renderItem={ItemView}
-        ListFooterComponent={renderFooter}
+        onEndReachedThreshold={0.5}
+        onEndReached={loadMoreBooks}
       />
     </View>
   );
