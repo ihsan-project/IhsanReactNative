@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   itemStyle: {
-    height: 120,
+    height: 200,
   },
   seperator: {
     height: 0.5,
@@ -51,10 +51,14 @@ const BookList: React.FC = () => {
     }
 
     setLoading(true);
+    console.log('fetching books page', currPage);
     makeAPICall(`books?page=${currPage}`, {}, 'GET', {
       Authorization: user?.access,
     })
       .then((response) => {
+        console.log(
+          `recevied books: ${JSON.stringify(response.results)} for page: ${currPage}`,
+        );
         setPrevPage(currPage);
         setDataSource([...dataSource, ...response.results]);
         setLoading(false);
@@ -97,7 +101,7 @@ const BookList: React.FC = () => {
         keyExtractor={(item, index) => index.toString()}
         ItemSeparatorComponent={ItemSeparatorView}
         renderItem={ItemView}
-        onEndReachedThreshold={0.5}
+        onEndReachedThreshold={0.2}
         onEndReached={loadMoreBooks}
         ListFooterComponent={renderFooter}
       />
