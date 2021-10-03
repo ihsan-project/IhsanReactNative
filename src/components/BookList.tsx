@@ -44,9 +44,14 @@ const BookList: React.FC = () => {
   const [dataSource, setDataSource] = useState([]);
   const [currPage, setCurrPage] = useState(1);
   const [prevPage, setPrevPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(-1);
 
   const getData = () => {
-    if (!user || currPage === prevPage) {
+    if (
+      !user ||
+      currPage === prevPage ||
+      (totalPages > 0 && currPage > totalPages)
+    ) {
       return;
     }
 
@@ -59,6 +64,13 @@ const BookList: React.FC = () => {
         console.log(
           `recevied books: ${JSON.stringify(response.results)} for page: ${currPage}`,
         );
+
+        // Set pagination meta once
+        if (totalPages < 0 && response.meta) {
+          console.log('set total pages', response.meta?.pageCount);
+          setTotalPages(response.meta?.pageCount);
+        }
+
         setPrevPage(currPage);
         setDataSource([...dataSource, ...response.results]);
         setLoading(false);
