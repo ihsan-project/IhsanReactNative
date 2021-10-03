@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  ActivityIndicator,
+} from 'react-native';
 import { makeAPICall } from '../middleware/api';
 
 const styles = StyleSheet.create({
@@ -76,6 +82,12 @@ const BookList: React.FC = () => {
     </Text>
   );
 
+  const renderFooter = () => (
+    <View style={styles.footer}>
+      {loading ? <ActivityIndicator size="small" color="#0000ff" /> : null}
+    </View>
+  );
+
   const ItemSeparatorView = () => <View style={styles.seperator} />;
 
   return (
@@ -87,6 +99,7 @@ const BookList: React.FC = () => {
         renderItem={ItemView}
         onEndReachedThreshold={0.5}
         onEndReached={loadMoreBooks}
+        ListFooterComponent={renderFooter}
       />
     </View>
   );
