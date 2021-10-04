@@ -5,7 +5,6 @@ import {
   Text,
   View,
   FlatList,
-  TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
 import { makeAPICall } from '../middleware/api';
@@ -21,21 +20,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
   },
-  loadMoreBtn: {
-    padding: 10,
-    backgroundColor: '#800000',
-    borderRadius: 4,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  btnText: {
-    color: 'white',
-    fontSize: 15,
-    textAlign: 'center',
-  },
   itemStyle: {
-    height: 44,
+    height: 200,
   },
   seperator: {
     height: 0.5,
@@ -54,13 +40,19 @@ interface Book {
 const BookList: React.FC = () => {
   const user = useSelector((state) => (state as any).auth.user);
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [dataSource, setDataSource] = useState([]);
   const [currPage, setCurrPage] = useState(1);
   const [prevPage, setPrevPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(-1);
 
   const getData = () => {
-    if (!user || currPage === prevPage) {
+    if (
+      !user ||
+      currPage === prevPage ||
+      (totalPages > 0 && currPage > totalPages) ||
+      loading
+    ) {
       return;
     }
 
@@ -69,6 +61,11 @@ const BookList: React.FC = () => {
       Authorization: user?.access,
     })
       .then((response) => {
+        // Set pagination meta once
+        if (totalPages < 0 && response.meta) {
+          setTotalPages(response.meta?.pageCount);
+        }
+
         setPrevPage(currPage);
         setDataSource([...dataSource, ...response.results]);
         setLoading(false);
@@ -81,23 +78,9 @@ const BookList: React.FC = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(getData, [user, currPage]);
 
-  const renderFooter = () => (
-    // Footer View with Load More button
-    <View style={styles.footer}>
-      <TouchableOpacity
-        activeOpacity={0.9}
-        onPress={() => {
-          setCurrPage(currPage + 1);
-        }}
-        // On Click of button load more data
-        style={styles.loadMoreBtn}>
-        <Text style={styles.btnText}>Load More</Text>
-        {loading ? (
-          <ActivityIndicator color="white" style={{ marginLeft: 8 }} />
-        ) : null}
-      </TouchableOpacity>
-    </View>
-  );
+  const loadMoreBooks = () => {
+    setCurrPage(currPage + 1);
+  };
 
   const displayItem = (item: any) => {
     console.log('Clicked', item);
@@ -110,6 +93,12 @@ const BookList: React.FC = () => {
     </Text>
   );
 
+  const renderFooter = () => (
+    <View style={styles.footer}>
+      {loading ? <ActivityIndicator size="small" color="#0000ff" /> : null}
+    </View>
+  );
+
   const ItemSeparatorView = () => <View style={styles.seperator} />;
 
   return (
@@ -119,6 +108,8 @@ const BookList: React.FC = () => {
         keyExtractor={(item, index) => index.toString()}
         ItemSeparatorComponent={ItemSeparatorView}
         renderItem={ItemView}
+        onEndReachedThreshold={0.2}
+        onEndReached={loadMoreBooks}
         ListFooterComponent={renderFooter}
       />
     </View>
