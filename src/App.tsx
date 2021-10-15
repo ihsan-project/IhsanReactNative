@@ -1,5 +1,5 @@
 import React from 'react';
-import { StatusBar } from 'react-native';
+import { StatusBar, SafeAreaView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import LoginContainer from './containers/Login';
 import MainContainer from './containers/Main';
@@ -15,7 +15,9 @@ const App: React.FC = () => {
 
   return (
     <>
-      <StatusBar barStyle="dark-content" />
+      <SafeAreaView>
+        <StatusBar barStyle="dark-content" />
+      </SafeAreaView>
       <ProgressBar />
       {isLoggedIn ? <MainContainer /> : <LoginContainer />}
       <Overlay />
