@@ -64,6 +64,7 @@ const BookList: React.FC = () => {
         // Set pagination meta once
         if (totalPages < 0 && response.meta) {
           setTotalPages(response.meta?.pageCount);
+          console.log('set total pages', response.meta?.pageCount);
         }
 
         setPrevPage(currPage);
@@ -79,6 +80,10 @@ const BookList: React.FC = () => {
   useEffect(getData, [user, currPage]);
 
   const loadMoreBooks = () => {
+    if (loading) {
+      return;
+    }
+
     setCurrPage(currPage + 1);
   };
 

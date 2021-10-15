@@ -68,6 +68,14 @@ Android Studio will find the right Gradle version for you and update it accordin
 
 Checkin these changes.
 
+#### Debuggin iOS build error
+
+If getting an ambiguous exit code 65, open xcode and run the build to debug the specific reason.
+
+One reason might be that xcode is using the native installed node version and you're using nvm. Running `brew upgrade` might fix atleast the native node version xcode uses. Haven't tried to symlink to the actual nvm version.
+
+Sometimes it doesn't work with `yarn ios`, but it does work when running on xcode. It even hot reloads on changes to the js. So just roll with it. Maybe some future version of react-native will fix it *shrug*.
+
 ## Redux Developer Tools
 
 - [Install redux developer tools using `brew`](https://dev.to/piscespieces/how-to-debug-redux-in-a-react-native-app-4b19)

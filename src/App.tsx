@@ -1,23 +1,11 @@
 import React from 'react';
-import { StatusBar, StyleSheet, View } from 'react-native';
+import { StatusBar, SafeAreaView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import LoginContainer from './containers/Login';
 import MainContainer from './containers/Main';
 import { appDidLoad } from './actions';
 import ProgressBar from './components/ProgressBar';
 import Overlay from './components/Overlay';
-
-const styles = StyleSheet.create({
-  overlay: {
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
 
 const App: React.FC = () => {
   const isLoggedIn = useSelector((state) => (state as any).auth.isLoggedIn);
@@ -27,12 +15,12 @@ const App: React.FC = () => {
 
   return (
     <>
-      <StatusBar barStyle="dark-content" />
+      <SafeAreaView>
+        <StatusBar barStyle="dark-content" />
+      </SafeAreaView>
       <ProgressBar />
       {isLoggedIn ? <MainContainer /> : <LoginContainer />}
-      <View style={styles.overlay}>
-        <Overlay />
-      </View>
+      <Overlay />
     </>
   );
 };
