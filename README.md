@@ -29,7 +29,7 @@ React Native Bootstrap
 - Setup Environment
   - Make sure your admin has run through the [steps here](https://github.com/ihsan-project/ihsan-android/wiki/Setup-Google-Signin-Authentication) to setup google-services.json
   - Run `yarn android-fingerprint`. Take the output `SHA1` string and give it to admins to add to Firebase
-  - Run `AWS_ACCESS_KEY_ID=<INSERT VALUE> AWS_SECRET_ACCESS_KEY=<INSERT VALUE> WS_CERT_BUCKET=<INSERT VALUE> yarn setup`. Get the key values from admin and replace the `<INSERT VALUE>`s
+  - Run `AWS_ACCESS_KEY_ID=<INSERT VALUE> AWS_SECRET_ACCESS_KEY=<INSERT VALUE> AWS_CERT_BUCKET=<INSERT VALUE> yarn setup`. Get the key values from admin and replace the `<INSERT VALUE>`s
 
 ### References
 
