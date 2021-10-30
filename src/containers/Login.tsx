@@ -27,11 +27,15 @@ const Login: React.FC = () => {
     dispatch(showLoading());
 
     try {
-      await GoogleSignin.hasPlayServices();
-      const userInfo = await GoogleSignin.signIn();
+      if (await GoogleSignin.hasPlayServices()) {
+        const userInfo = await GoogleSignin.signIn();
 
-      dispatch(hideLoading());
-      dispatch(googleAuthenticated(userInfo));
+        dispatch(hideLoading());
+        dispatch(googleAuthenticated(userInfo));
+      } else {
+        dispatch(hideLoading());
+        Alert.alert('Google signing not available');
+      }
     } catch (error) {
       dispatch(hideLoading());
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
