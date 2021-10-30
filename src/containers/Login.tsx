@@ -37,6 +37,7 @@ const Login: React.FC = () => {
         Alert.alert('Google signing not available');
       }
     } catch (error) {
+      dispatch(hideLoading());
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
         // user cancelled the login flow
       } else if (error.code === statusCodes.IN_PROGRESS) {
